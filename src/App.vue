@@ -15,6 +15,17 @@ import { ref, reactive } from 'vue'
     function changeCountry(newCountry) {
         person.country = newCountry
     }
+
+    const tasks = ref([
+        {name: 'Boodschappen doen', completed: false},
+        {name: 'Afwassen', completed: true},
+        {name: 'Hond uitlaten', completed: false}
+    ])
+
+    function toggleTask(task) {
+        task.completed = !task.completed
+    }
+
 </script>
 
 <template>
@@ -25,4 +36,10 @@ import { ref, reactive } from 'vue'
   <p>{{ clicks }}</p>
   <p>{{ person.firstName }}</p>
   <p>{{ person.country }}</p>
+  <ul>
+    <li v-for="(task, index) in tasks" :key="index">
+      {{ task.name }}
+      {{ task.completed ? '(voltooid)' : '(niet voltooid)' }}
+    </li>
+  </ul>
 </template>
