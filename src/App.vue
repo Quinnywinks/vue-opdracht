@@ -26,6 +26,28 @@ import { ref, reactive } from 'vue'
         task.completed = !task.completed
     }
 
+    const people = ref([
+        { name: 'Jan', age: 12 },
+        { name: 'Piet', age: 20 }
+    ])
+
+    const newName = ref('')
+    const newAge = ref(0)
+
+    function addPerson() {
+        people.value.push({
+        name: newName.value,
+        age: newAge.value
+        })
+
+        newName.value = ''
+        newAge.value =  ''
+    }
+
+    const children = computed(() => {
+        return people.value.filter(person => person.age < 18)
+        })
+
 </script>
 
 <template>
@@ -40,6 +62,15 @@ import { ref, reactive } from 'vue'
     <li v-for="(task, index) in tasks" :key="index">
       {{ task.name }}
       {{ task.completed ? '(voltooid)' : '(niet voltooid)' }}
+      <button @click="toggleTask(task)">Toggle</button>
     </li>
   </ul>
+  <input type="text" v-model="newName">
+  <input type="number" v-model.number="newAge">
+  <button @click="addPerson">Toevoegen</button>
+  <ul>
+  <li v-for="(person, index) in people" :key="index">
+    {{ person.name }} - {{ person.age }} jaar
+  </li>
+</ul>
 </template>
