@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 
     const clicks = ref(0)
 
@@ -48,12 +48,25 @@ import { ref, reactive } from 'vue'
         return people.value.filter(person => person.age < 18)
         })
 
+    const adults = computed(() => {
+        return people.value.filter(person => person.age >= 18)
+    })
+
+    const totalPeople = computed(() => {
+        return people.value.length
+    })
+
+    const numberOfChildren = computed(() => {
+        return children.value.length
+    })
+
 </script>
 
+
 <template>
-  <button @click="incrementClicks">"Klik mij!"</button>
-  <button @click="changeCountry('Nederland')">"Nederland"</button>
-  <button @click="changeCountry('Belgie')">"Belgie"</button>
+  <button @click="incrementClicks">Klik mij!</button>
+  <button @click="changeCountry('Nederland')">Nederland</button>
+  <button @click="changeCountry('Belgie')">Belgie</button>
   <input type="text" v-model="person.firstName">
   <p>{{ clicks }}</p>
   <p>{{ person.firstName }}</p>
@@ -68,9 +81,30 @@ import { ref, reactive } from 'vue'
   <input type="text" v-model="newName">
   <input type="number" v-model.number="newAge">
   <button @click="addPerson">Toevoegen</button>
-  <ul>
+  
+<h2>Alle personen</h2>
+<ul>
   <li v-for="(person, index) in people" :key="index">
     {{ person.name }} - {{ person.age }} jaar
   </li>
 </ul>
+
+<h2>Kinderen</h2>
+<ul>
+  <li v-for="(child, index) in children" :key="index">
+    {{ child.name }} - {{ child.age }} jaar
+  </li>
+</ul>
+
+<h2>Volwassenen</h2>
+<ul>
+  <li v-for="(adult, index) in adults" :key="index">
+    {{ adult.name }} - {{ adult.age }} jaar
+  </li>
+</ul>
+<h2>Statistieken</h2>
+
+<p>Totaal aantal personen: {{ totalPeople }}</p>
+<p>Aantal kinderen: {{ numberOfChildren }}</p>
+
 </template>
