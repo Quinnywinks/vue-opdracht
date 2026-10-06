@@ -62,7 +62,6 @@ import { ref, reactive, computed } from 'vue'
 
 </script>
 
-
 <template>
   <button @click="incrementClicks">Klik mij!</button>
   <button @click="changeCountry('Nederland')">Nederland</button>
