@@ -1,6 +1,5 @@
 <script setup>
 import { ref, reactive, computed } from 'vue'
-
     const clicks = ref(0)
 
     const person = reactive({
@@ -57,8 +56,12 @@ import { ref, reactive, computed } from 'vue'
     })
 
     const numberOfChildren = computed(() => {
-        return children.value.length
+       return children.value.length
     })
+
+import ParentComponent from './components/ParentComponent.vue'
+    
+
 
 </script>
 
@@ -105,5 +108,7 @@ import { ref, reactive, computed } from 'vue'
 
 <p>Totaal aantal personen: {{ totalPeople }}</p>
 <p>Aantal kinderen: {{ numberOfChildren }}</p>
+
+<ParentComponent />
 
 </template>
